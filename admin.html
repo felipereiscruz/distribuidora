@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Admin — Distribuidora Gonçalves</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,7 +14,8 @@
   --radius:14px;--radius-sm:8px;--transition:0.2s cubic-bezier(.4,0,.2,1);--sidebar:220px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:pan-x pan-y;}
+input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 
 /* LOGIN */
 .login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:1000}
@@ -331,7 +332,19 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .mais-item-danger{color:var(--danger)!important}
 .mais-item-danger:hover{border-color:var(--danger)!important;background:rgba(231,76,60,0.08)!important;color:var(--danger)!important}
 
-/* HORÁRIO DE FUNCIONAMENTO */
+/* FINANCIAL ROW */
+.fin-row{cursor:default!important;grid-template-columns:90px 1fr 140px 88px!important;}
+.fin-cell-date{font-size:11px;color:var(--text2);}
+.fin-cell-desc{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.fin-cell-val{font-weight:700;font-size:13px;}
+.fin-cell-actions{display:flex;gap:5px;align-items:center;}
+@media(max-width:700px){
+  .fin-row{grid-template-columns:1fr auto!important;grid-template-rows:auto auto;gap:4px 8px;padding:12px 16px!important;}
+  .fin-cell-date{grid-column:1;grid-row:2;font-size:10px;}
+  .fin-cell-desc{grid-column:1;grid-row:1;font-size:13px;white-space:normal;}
+  .fin-cell-val{grid-column:2;grid-row:1;text-align:right;font-size:13px;}
+  .fin-cell-actions{grid-column:2;grid-row:2;justify-content:flex-end;}
+}
 .schedule-grid{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:16px}
 .schedule-day-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:0;margin-top:-1px;background:var(--bg2);transition:var(--transition)}
 .schedule-day-row:first-child{border-radius:var(--radius-sm) var(--radius-sm) 0 0;margin-top:0}
@@ -1094,12 +1107,14 @@ function renderFinancial(){
   el.innerHTML=sorted.map(e=>{
     const isR=e.tipo==='receita';
     const dStr=e.data?new Date(e.data+'T12:00:00').toLocaleDateString('pt-BR'):'-';
-    return `<div class="order-row" style="cursor:default;grid-template-columns:100px 1fr 150px 44px 44px;">
-      <div style="font-size:11px;color:var(--text2);">${dStr}</div>
-      <div style="font-size:13px;">${e.descricao}</div>
-      <div style="font-weight:700;color:${isR?'var(--success)':'var(--danger)'};">${isR?'+':'-'} R$ ${e.valor.toFixed(2).replace('.',',')}</div>
-      <div><button class="btn-sm btn-ghost" onclick="editFinEntry('${e._docId}')" title="Editar">✏️</button></div>
-      <div><button class="btn-sm btn-danger" onclick="deleteFinEntry('${e._docId}')">🗑️</button></div>
+    return `<div class="order-row fin-row">
+      <div class="fin-cell-date">${dStr}</div>
+      <div class="fin-cell-desc">${e.descricao}</div>
+      <div class="fin-cell-val" style="color:${isR?'var(--success)':'var(--danger)'};">${isR?'+':'-'} R$ ${e.valor.toFixed(2).replace('.',',')}</div>
+      <div class="fin-cell-actions">
+        <button class="btn-sm btn-ghost" onclick="editFinEntry('${e._docId}')" title="Editar">✏️</button>
+        <button class="btn-sm btn-danger" onclick="deleteFinEntry('${e._docId}')">🗑️</button>
+      </div>
     </div>`;
   }).join('');
 }
