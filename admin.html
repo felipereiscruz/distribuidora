@@ -293,13 +293,13 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 }
 .mais-overlay.open{opacity:1;pointer-events:all}
 .mais-sheet{
-  position:fixed;bottom:0;left:0;right:0;
+  position:fixed;bottom:68px;left:0;right:0;
   background:var(--bg2);
   border-radius:20px 20px 0 0;
   border-top:1px solid var(--border);
   z-index:199;
-  padding:12px 20px calc(20px + env(safe-area-inset-bottom));
-  transform:translateY(100%);
+  padding:12px 20px 20px;
+  transform:translateY(calc(100% + 68px));
   transition:transform 0.32s cubic-bezier(.4,0,.2,1);
   box-shadow:0 -16px 48px rgba(0,0,0,0.5);
 }
