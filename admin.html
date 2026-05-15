@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — Distribuidora Gonçalves</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,8 +14,7 @@
   --radius:14px;--radius-sm:8px;--transition:0.2s cubic-bezier(.4,0,.2,1);--sidebar:220px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:pan-x pan-y;}
-input,textarea{-webkit-user-select:text!important;user-select:text!important;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
 
 /* LOGIN */
 .login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:1000}
@@ -127,6 +126,8 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 .btn-danger:hover{background:rgba(231,76,60,0.1)}
 .btn-success{background:none;color:var(--success);border-color:rgba(46,204,113,0.3)}
 .btn-success:hover{background:rgba(46,204,113,0.1)}
+.btn-whatsapp{background:rgba(37,211,102,0.12);color:#25D366;border-color:rgba(37,211,102,0.35);}
+.btn-whatsapp:hover{background:rgba(37,211,102,0.22);border-color:#25D366;}
 .btn-primary-full{background:var(--ember);color:#fff;border:none;border-radius:var(--radius-sm);padding:12px 20px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:var(--transition);width:100%}
 .btn-primary-full:hover{background:var(--ember-deep)}
 
@@ -177,7 +178,7 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;display:none;align-items:center;justify-content:center}
 .modal-overlay.active{display:flex}
-.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px;width:90%;max-width:520px;max-height:90vh;overflow-y:auto;animation:fadeIn 0.2s ease}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px;width:90%;max-width:520px;max-height:90vh;overflow-y:auto;overflow-x:hidden;animation:fadeIn 0.2s ease}
 @keyframes fadeIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
 .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .modal-head h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:17px}
@@ -204,6 +205,20 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 /* DELETE BUTTON */
 .btn-delete-order{background:none;color:var(--danger);border:1px solid rgba(231,76,60,0.3);border-radius:var(--radius-sm);padding:10px 16px;font-size:13px;cursor:pointer;width:100%;margin-top:10px;transition:var(--transition);font-family:'Inter',sans-serif}
 .btn-delete-order:hover{background:rgba(231,76,60,0.1)}
+
+/* WEIGHT VARIANTS */
+.variants-section{margin-top:14px;background:rgba(126,200,227,0.07);border:1px solid rgba(126,200,227,0.25);border-radius:var(--radius-sm);padding:14px;overflow:hidden;}
+.variants-section .vs-title{font-size:12px;color:var(--ice);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.variant-row{display:grid;grid-template-columns:1.2fr 1fr 1fr 32px;gap:8px;align-items:center;margin-bottom:8px;min-width:0;}
+.variant-row input{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:var(--transition);width:100%;min-width:0;}
+.variant-row input:focus{border-color:var(--ice);}
+.variant-row input.promo-input{border-color:rgba(255,107,53,0.3);background:rgba(255,107,53,0.06);}
+.variant-row input.promo-input:focus{border-color:var(--ember);}
+.variant-row input.promo-input::placeholder{color:rgba(255,107,53,0.5);}
+.btn-del-variant{width:28px;height:28px;background:none;border:1px solid rgba(231,76,60,0.3);border-radius:6px;color:var(--danger);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:var(--transition);}
+.btn-del-variant:hover{background:rgba(231,76,60,0.1);}
+.btn-add-variant{background:rgba(126,200,227,0.1);border:1px dashed rgba(126,200,227,0.4);color:var(--ice);border-radius:6px;padding:7px 12px;font-size:12px;cursor:pointer;width:100%;transition:var(--transition);font-family:'Inter',sans-serif;}
+.btn-add-variant:hover{background:rgba(126,200,227,0.18);}
 
 /* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--bg3);color:var(--text);padding:12px 20px;border-radius:var(--radius-sm);border:1px solid var(--border);font-size:13px;z-index:500;opacity:0;transition:opacity 0.3s;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
@@ -293,13 +308,13 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 }
 .mais-overlay.open{opacity:1;pointer-events:all}
 .mais-sheet{
-  position:fixed;bottom:68px;left:0;right:0;
+  position:fixed;bottom:0;left:0;right:0;
   background:var(--bg2);
   border-radius:20px 20px 0 0;
   border-top:1px solid var(--border);
   z-index:199;
-  padding:12px 20px 20px;
-  transform:translateY(calc(100% + 68px));
+  padding:12px 20px calc(20px + env(safe-area-inset-bottom));
+  transform:translateY(100%);
   transition:transform 0.32s cubic-bezier(.4,0,.2,1);
   box-shadow:0 -16px 48px rgba(0,0,0,0.5);
 }
@@ -332,19 +347,7 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
 .mais-item-danger{color:var(--danger)!important}
 .mais-item-danger:hover{border-color:var(--danger)!important;background:rgba(231,76,60,0.08)!important;color:var(--danger)!important}
 
-/* FINANCIAL ROW */
-.fin-row{cursor:default!important;grid-template-columns:90px 1fr 140px 88px!important;}
-.fin-cell-date{font-size:11px;color:var(--text2);}
-.fin-cell-desc{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.fin-cell-val{font-weight:700;font-size:13px;}
-.fin-cell-actions{display:flex;gap:5px;align-items:center;}
-@media(max-width:700px){
-  .fin-row{grid-template-columns:1fr auto!important;grid-template-rows:auto auto;gap:4px 8px;padding:12px 16px!important;}
-  .fin-cell-date{grid-column:1;grid-row:2;font-size:10px;}
-  .fin-cell-desc{grid-column:1;grid-row:1;font-size:13px;white-space:normal;}
-  .fin-cell-val{grid-column:2;grid-row:1;text-align:right;font-size:13px;}
-  .fin-cell-actions{grid-column:2;grid-row:2;justify-content:flex-end;}
-}
+/* HORÁRIO DE FUNCIONAMENTO */
 .schedule-grid{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:16px}
 .schedule-day-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--border);border-radius:0;margin-top:-1px;background:var(--bg2);transition:var(--transition)}
 .schedule-day-row:first-child{border-radius:var(--radius-sm) var(--radius-sm) 0 0;margin-top:0}
@@ -634,16 +637,30 @@ input,textarea{-webkit-user-select:text!important;user-select:text!important;}
       <div class="field-group"><label>Categoria *</label><input type="text" id="prodCategory" placeholder="Ex: Gelo, Carvão"></div>
     </div>
     <div class="field-group"><label>Descrição</label><textarea id="prodDesc" placeholder="Descreva o produto..."></textarea></div>
-    <div class="form-grid">
+    <div class="form-grid" id="globalPriceField">
       <div class="field-group"><label>Preço (R$) *</label><input type="number" id="prodPrice" placeholder="0,00" min="0" step="0.01"></div>
       <div class="field-group"><label>Status</label><select id="prodStatus"><option value="ativo">Ativo</option><option value="inativo">Inativo</option></select></div>
     </div>
-    <div class="field-group" style="background:rgba(255,107,53,0.07);border:1px solid rgba(255,107,53,0.25);border-radius:var(--radius-sm);padding:12px;">
+    <div id="variantStatusField" class="field-group" style="display:none;"><label>Status</label><select id="prodStatusVariant" onchange="document.getElementById('prodStatus').value=this.value"><option value="ativo">Ativo</option><option value="inativo">Inativo</option></select></div>
+    <div id="globalPromoField" class="field-group" style="background:rgba(255,107,53,0.07);border:1px solid rgba(255,107,53,0.25);border-radius:var(--radius-sm);padding:12px;">
       <label style="color:var(--ember);">🏷️ Preço promocional (R$) <span style="font-size:10px;color:var(--text2);font-weight:400;">— deixe vazio para desativar</span></label>
       <input type="number" id="prodPromoPrice" placeholder="0,00" min="0" step="0.01">
     </div>
     <div class="field-group"><label>URL da imagem (opcional)</label><input type="text" id="prodImageUrl" placeholder="https://..."></div>
-    <button class="btn-primary-full" onclick="saveProduct()">💾 Salvar produto</button>
+
+    <div class="variants-section">
+      <div class="vs-title">⚖️ Variações de peso <span style="font-size:10px;color:var(--text2);font-weight:400;">— deixe vazio para usar o preço único acima</span></div>
+    <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr 32px;gap:8px;margin-bottom:6px;min-width:0;overflow:hidden;">
+        <span style="font-size:11px;color:var(--text2);font-weight:500;padding-left:2px;">Peso / Tamanho</span>
+        <span style="font-size:11px;color:var(--text2);font-weight:500;padding-left:2px;">Preço (R$)</span>
+        <span style="font-size:11px;color:rgba(255,107,53,0.8);font-weight:500;padding-left:2px;">🏷️ Promo</span>
+        <span></span>
+      </div>
+      <div id="variantsList"></div>
+      <button class="btn-add-variant" onclick="addVariantRow()">+ Adicionar variação</button>
+    </div>
+
+    <button class="btn-primary-full" style="margin-top:14px;" onclick="saveProduct()">💾 Salvar produto</button>
   </div>
 </div>
 
@@ -857,11 +874,28 @@ function renderOrders(){
   el.innerHTML=filtered.length===0?`<div class="empty-admin"><div class="empty-icon">📭</div><p>Nenhum pedido encontrado.</p></div>`:filtered.map(o=>orderRowHTML(o)).join('');
 }
 
+function openWhatsApp(phone, name, orderId){
+  let cleaned = phone.replace(/\D/g,'');
+  // Remove DDI 55 duplicado: se tiver 13 dígitos começando com 55, já está correto
+  // Se tiver 11 dígitos (DDD + número), adiciona 55
+  // Se começar com 55 e tiver 12+ dígitos, usa direto
+  if(cleaned.startsWith('55') && cleaned.length >= 12) {
+    // já tem DDI, usa como está
+  } else {
+    cleaned = '55' + cleaned;
+  }
+  const msg = encodeURIComponent(`Olá, ${name}! 👋 Aqui é da Distribuidora Gonçalves, estamos entrando em contato sobre seu pedido #${orderId}.`);
+  window.open(`https://wa.me/${cleaned}?text=${msg}`, '_blank');
+}
+window.openWhatsApp = openWhatsApp;
+
 function orderRowHTML(o){
   const badge=`<span class="badge badge-${o.status}">${statusLabel(o.status)}</span>`;
   const itemsSummary=o.items?.map(i=>`${i.qty}x ${i.name}`).join(', ')||'—';
   const paidBadge=o.paid?`<span class="badge badge-pago" style="font-size:9px;">💳 Pago</span>`:'';
   const total=o.grandTotal!=null?`R$ ${o.grandTotal.toFixed(2).replace('.',',')}`:' ';
+  const nameSafe=(o.name||'').replace(/'/g,"\\'");
+  const waBtnList=o.phone?`<button class="btn-sm btn-whatsapp" onclick="event.stopPropagation();openWhatsApp('${o.phone}','${nameSafe}','${o.orderId}')" title="Chamar no WhatsApp">💬 WhatsApp</button>`:'';
   return`<div class="order-row" onclick="openOrderDetail('${o._docId}')" style="cursor:pointer;">
     <div class="cell-id">#${o.orderId}</div>
     <div class="cell-client">${o.name}<span>${o.phone} · ${o.deliveryType==='retirada'?'Retirada':o.address}</span></div>
@@ -870,6 +904,7 @@ function orderRowHTML(o){
     <div>${badge}</div>
     <div class="cell-actions">
       <button class="btn-sm btn-ghost" onclick="event.stopPropagation();openOrderDetail('${o._docId}')">Detalhes</button>
+      ${waBtnList}
     </div>
   </div>`;
 }
@@ -895,7 +930,7 @@ window.openOrderDetail=function(docId){
 
   document.getElementById('orderDetailContent').innerHTML=`
     <div class="detail-row"><span class="detail-label">Cliente</span><span class="detail-val">${o.name}</span></div>
-    <div class="detail-row"><span class="detail-label">Telefone</span><span class="detail-val">${o.phone}</span></div>
+    <div class="detail-row"><span class="detail-label">Telefone</span><span class="detail-val">${o.phone}${o.phone?` <button class="btn-sm btn-whatsapp" style="margin-left:8px;" onclick="openWhatsApp('${o.phone}','${(o.name||'').replace(/'/g,"\\'")}','${o.orderId}')">💬 Chamar no WhatsApp</button>`:''}</span></div>
     <div class="detail-row"><span class="detail-label">Endereço</span><span class="detail-val">${o.address}${o.complement?', '+o.complement:''}</span></div>
     <div class="detail-row"><span class="detail-label">Pagamento</span><span class="detail-val">${o.payment==='pix'?'📱 PIX':o.deliveryType==='retirada'?'💵 Pagamento na retirada':'💵 Pagamento na entrega'}</span></div>
     <div class="detail-row"><span class="detail-label">Tipo</span><span class="detail-val">${o.deliveryType==='retirada'?'🏪 Retirada':'🛵 Entrega'}</span></div>
@@ -1006,6 +1041,10 @@ function renderProducts(){
       <div class="prod-body">
         <div class="prod-name">${p.name}</div>
         <div class="prod-cat">${p.category||''} ${p.promoPrice?`· <span style="text-decoration:line-through;color:#666">R$ ${Number(p.price).toFixed(2).replace('.',',')}</span> <span style="color:var(--ember);font-weight:700">R$ ${Number(p.promoPrice).toFixed(2).replace('.',',')}</span>`:p.price?`· R$ ${Number(p.price).toFixed(2).replace('.',',')}`:''}</div>
+        ${p.variants&&p.variants.length>0?`<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;">${p.variants.map(v=>v.promoPrice
+          ?`<span style="background:rgba(255,107,53,0.1);color:var(--ember);border:1px solid rgba(255,107,53,0.3);border-radius:12px;font-size:10px;padding:2px 7px;font-weight:600;">${v.label} · <s style='opacity:0.6'>R$ ${Number(v.price).toFixed(2).replace('.',',')}</s> R$ ${Number(v.promoPrice).toFixed(2).replace('.',',')}</span>`
+          :`<span style="background:rgba(126,200,227,0.12);color:#7EC8E3;border:1px solid rgba(126,200,227,0.3);border-radius:12px;font-size:10px;padding:2px 7px;font-weight:600;">${v.label} · R$ ${Number(v.price).toFixed(2).replace('.',',')}</span>`
+        ).join('')}</div>`:``}
         <div class="prod-status status-${p.status}">${p.status==='ativo'?'● Ativo':'○ Inativo'}</div>
         <div class="prod-actions">
           <button class="btn-sm btn-ghost" onclick="editProduct('${p._docId}')">Editar</button>
@@ -1015,16 +1054,62 @@ function renderProducts(){
     </div>`).join('');
 }
 
+// ── VARIANTS
+let editingVariants = [];
+
+window.addVariantRow = function(label='', price='', promoPrice='') {
+  editingVariants.push({label, price, promoPrice});
+  renderVariantRows();
+};
+
+function renderVariantRows() {
+  const list = document.getElementById('variantsList');
+  if(!list) return;
+  const hasAny = editingVariants.length > 0;
+  // Mostrar/ocultar o campo de promoPrice global
+  const globalPromoField = document.getElementById('globalPromoField');
+  if(globalPromoField) globalPromoField.style.display = hasAny ? 'none' : 'block';
+  // Mostrar/ocultar campo de preço único
+  const globalPriceField = document.getElementById('globalPriceField');
+  if(globalPriceField) globalPriceField.style.display = hasAny ? 'none' : 'grid';
+  // Campo de status separado quando há variações
+  const variantStatusField = document.getElementById('variantStatusField');
+  if(variantStatusField){
+    variantStatusField.style.display = hasAny ? 'block' : 'none';
+    const sel = document.getElementById('prodStatusVariant');
+    if(sel) sel.value = document.getElementById('prodStatus').value || 'ativo';
+  }
+
+  list.innerHTML = editingVariants.map((v, i) => `
+    <div class="variant-row">
+      <input type="text" placeholder="Ex: 2kg, 5kg, 10L..." value="${v.label||''}" oninput="editingVariants[${i}].label=this.value">
+      <input type="number" placeholder="0,00" min="0" step="0.01" value="${v.price||''}" oninput="editingVariants[${i}].price=this.value">
+      <input type="number" class="promo-input" placeholder="Promo" min="0" step="0.01" value="${v.promoPrice||''}" oninput="editingVariants[${i}].promoPrice=this.value" title="Preço promocional (opcional)">
+      <button class="btn-del-variant" onclick="removeVariant(${i})">✕</button>
+    </div>`).join('');
+}
+
+window.removeVariant = function(i) {
+  editingVariants.splice(i, 1);
+  renderVariantRows();
+};
+
 window.openProductModal=function(){
   editingProductDocId=null;
+  editingVariants=[];
   document.getElementById('productModalTitle').textContent='Novo produto';
   ['prodId','prodName','prodCategory','prodDesc','prodPrice','prodPromoPrice','prodImageUrl'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('prodStatus').value='ativo';
+  const gpf=document.getElementById('globalPromoField');if(gpf)gpf.style.display='block';
+  const gprF=document.getElementById('globalPriceField');if(gprF)gprF.style.display='grid';
+  const vsF=document.getElementById('variantStatusField');if(vsF)vsF.style.display='none';
+  renderVariantRows();
   document.getElementById('productModal').classList.add('active');
 };
 window.editProduct=function(docId){
   const p=allProducts.find(x=>x._docId===docId);if(!p)return;
   editingProductDocId=docId;
+  editingVariants=p.variants?JSON.parse(JSON.stringify(p.variants.map(v=>({...v,promoPrice:v.promoPrice||''})))):[]; 
   document.getElementById('productModalTitle').textContent='Editar produto';
   document.getElementById('prodName').value=p.name||'';
   document.getElementById('prodCategory').value=p.category||'';
@@ -1033,6 +1118,7 @@ window.editProduct=function(docId){
   document.getElementById('prodStatus').value=p.status||'ativo';
   document.getElementById('prodImageUrl').value=p.imageUrl||'';
   document.getElementById('prodPromoPrice').value=p.promoPrice!=null?p.promoPrice:'';
+  renderVariantRows();
   document.getElementById('productModal').classList.add('active');
 };
 window.saveProduct=async function(){
@@ -1040,7 +1126,12 @@ window.saveProduct=async function(){
   const category=document.getElementById('prodCategory').value.trim();
   if(!name){toast('Nome obrigatório.');return}
   const promoPriceRaw=parseFloat(document.getElementById('prodPromoPrice').value);
-  const data={name,category,desc:document.getElementById('prodDesc').value.trim(),price:parseFloat(document.getElementById('prodPrice').value)||0,promoPrice:isNaN(promoPriceRaw)||promoPriceRaw<=0?null:promoPriceRaw,status:document.getElementById('prodStatus').value,imageUrl:document.getElementById('prodImageUrl').value.trim(),updatedAt:serverTimestamp()};
+  // Clean variants: remove empty rows, parse prices
+  const cleanVariants=editingVariants.filter(v=>v.label&&v.label.trim()).map(v=>{
+    const pp=parseFloat(v.promoPrice);
+    return{label:v.label.trim(),price:parseFloat(v.price)||0,promoPrice:(!isNaN(pp)&&pp>0)?pp:null};
+  });
+  const data={name,category,desc:document.getElementById('prodDesc').value.trim(),price:parseFloat(document.getElementById('prodPrice').value)||0,promoPrice:isNaN(promoPriceRaw)||promoPriceRaw<=0?null:promoPriceRaw,status:document.getElementById('prodStatus').value,imageUrl:document.getElementById('prodImageUrl').value.trim(),variants:cleanVariants.length>0?cleanVariants:null,updatedAt:serverTimestamp()};
   try{
     if(editingProductDocId){await updateDoc(doc(db,'products',editingProductDocId),data);toast('Produto atualizado!')}
     else{data.createdAt=serverTimestamp();await addDoc(collection(db,'products'),data);toast('Produto adicionado!')}
@@ -1107,14 +1198,12 @@ function renderFinancial(){
   el.innerHTML=sorted.map(e=>{
     const isR=e.tipo==='receita';
     const dStr=e.data?new Date(e.data+'T12:00:00').toLocaleDateString('pt-BR'):'-';
-    return `<div class="order-row fin-row">
-      <div class="fin-cell-date">${dStr}</div>
-      <div class="fin-cell-desc">${e.descricao}</div>
-      <div class="fin-cell-val" style="color:${isR?'var(--success)':'var(--danger)'};">${isR?'+':'-'} R$ ${e.valor.toFixed(2).replace('.',',')}</div>
-      <div class="fin-cell-actions">
-        <button class="btn-sm btn-ghost" onclick="editFinEntry('${e._docId}')" title="Editar">✏️</button>
-        <button class="btn-sm btn-danger" onclick="deleteFinEntry('${e._docId}')">🗑️</button>
-      </div>
+    return `<div class="order-row" style="cursor:default;grid-template-columns:100px 1fr 150px 44px 44px;">
+      <div style="font-size:11px;color:var(--text2);">${dStr}</div>
+      <div style="font-size:13px;">${e.descricao}</div>
+      <div style="font-weight:700;color:${isR?'var(--success)':'var(--danger)'};">${isR?'+':'-'} R$ ${e.valor.toFixed(2).replace('.',',')}</div>
+      <div><button class="btn-sm btn-ghost" onclick="editFinEntry('${e._docId}')" title="Editar">✏️</button></div>
+      <div><button class="btn-sm btn-danger" onclick="deleteFinEntry('${e._docId}')">🗑️</button></div>
     </div>`;
   }).join('');
 }
