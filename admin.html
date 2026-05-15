@@ -233,6 +233,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 /* RESPONSIVE */
 @media(max-width:1100px){.stats-grid{grid-template-columns:1fr 1fr}.products-admin-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.order-row{grid-template-columns:60px 1fr 80px 80px}.order-row .cell-items,.order-row .cell-pay{display:none}}
+@media(max-width:700px){
+  .stats-grid{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .stat-card{padding:12px 12px 10px;border-radius:10px}
+  .stat-card-top{margin-bottom:6px}
+  .stat-card .stat-icon-box{width:28px;height:28px;font-size:14px;border-radius:8px}
+  .stat-card .stat-num{font-size:22px;margin-bottom:0}
+  .stat-card .stat-revenue{font-size:11px;margin-bottom:3px}
+  .stat-card .stat-sub{font-size:10px;gap:3px}
+  .stat-card .stat-label{font-size:9px;letter-spacing:0.5px}
+  .stat-pill{font-size:9px;padding:2px 5px}
+}
 .bottom-nav{
   display:none;position:fixed;bottom:0;left:0;right:0;
   background:rgba(18,18,18,0.96);
@@ -302,7 +313,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 /* MAIS SHEET */
 .mais-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,0.55);
-  z-index:198;opacity:0;pointer-events:none;
+  z-index:202;opacity:0;pointer-events:none;
   transition:opacity 0.3s ease;
   backdrop-filter:blur(2px);
 }
@@ -312,8 +323,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   background:var(--bg2);
   border-radius:20px 20px 0 0;
   border-top:1px solid var(--border);
-  z-index:199;
-  padding:12px 20px calc(20px + env(safe-area-inset-bottom));
+  z-index:203;
+  padding:12px 20px calc(72px + env(safe-area-inset-bottom));
   transform:translateY(100%);
   transition:transform 0.32s cubic-bezier(.4,0,.2,1);
   box-shadow:0 -16px 48px rgba(0,0,0,0.5);
