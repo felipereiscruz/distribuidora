@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Admin — Distribuidora Gonçalves</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -234,15 +234,41 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 @media(max-width:1100px){.stats-grid{grid-template-columns:1fr 1fr}.products-admin-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.order-row{grid-template-columns:60px 1fr 80px 80px}.order-row .cell-items,.order-row .cell-pay{display:none}}
 @media(max-width:700px){
-  .stats-grid{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-  .stat-card{padding:12px 12px 10px;border-radius:10px}
-  .stat-card-top{margin-bottom:6px}
-  .stat-card .stat-icon-box{width:28px;height:28px;font-size:14px;border-radius:8px}
-  .stat-card .stat-num{font-size:22px;margin-bottom:0}
-  .stat-card .stat-revenue{font-size:11px;margin-bottom:3px}
-  .stat-card .stat-sub{font-size:10px;gap:3px}
-  .stat-card .stat-label{font-size:9px;letter-spacing:0.5px}
-  .stat-pill{font-size:9px;padding:2px 5px}
+  .stats-grid.stats-grid-desktop{display:none!important}
+  .stats-mobile{display:flex}
+}
+
+/* MOBILE STATS BAR */
+.stats-mobile{
+  display:none;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px 4px;
+  margin-bottom:14px;
+  align-items:stretch;
+  justify-content:space-around;
+}
+.smc-item{
+  display:flex;flex-direction:column;align-items:center;
+  gap:2px;flex:1;padding:2px 4px;
+}
+.smc-dot{
+  width:6px;height:6px;border-radius:50%;margin-bottom:1px;
+}
+.smc-label{
+  font-size:9px;color:var(--text2);font-weight:600;
+  text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;
+}
+.smc-val{
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+  font-size:20px;color:var(--text);line-height:1;
+}
+.smc-sub{
+  font-size:9px;font-weight:600;white-space:nowrap;
+}
+.smc-divider{
+  width:1px;background:var(--border);margin:4px 0;align-self:stretch;
 }
 .bottom-nav{
   display:none;position:fixed;bottom:0;left:0;right:0;
@@ -379,11 +405,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   :root{--sidebar:0px}
   .sidebar{display:none}
   .main{margin-left:0;padding-bottom:80px}
-  .stats-grid{grid-template-columns:1fr 1fr}
+  .content{padding:14px;overflow-x:hidden}
+  .stats-grid.stats-grid-desktop{display:none!important}
   .products-admin-grid{grid-template-columns:1fr}
   .finance-grid{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
   .bottom-nav{display:flex!important}
+  .table-card{overflow-x:hidden}
+  .order-row{grid-template-columns:50px 1fr 80px!important;padding:10px 12px;gap:8px}
+  .order-row .cell-items,.order-row .cell-pay,.order-row .cell-actions{display:none!important}
+  .order-row .cell-status{display:flex!important}
 }
 
 </style>
@@ -451,7 +482,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   <div class="content">
 
     <div class="page active" id="page-dashboard">
-      <div class="stats-grid">
+      <!-- DESKTOP: cards normais -->
+      <div class="stats-grid stats-grid-desktop">
         <div class="stat-card" id="cardToday">
           <div class="stat-card-accent" style="background:#64B5F6"></div>
           <div class="stat-card-top">
@@ -491,6 +523,36 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
           <div class="stat-num" id="statCancelled">0</div>
           <div class="stat-revenue" id="statCancelledVal" style="color:#E74C3C;font-size:12px;">sem cancelamentos</div>
           <div class="stat-sub"><span class="stat-pill stat-pill-red" id="statCancelledPct">0% do dia</span></div>
+        </div>
+      </div>
+      <!-- MOBILE: barra compacta -->
+      <div class="stats-mobile">
+        <div class="smc-item">
+          <span class="smc-dot" style="background:#64B5F6"></span>
+          <span class="smc-label">Hoje</span>
+          <span class="smc-val" id="smc-today">0</span>
+          <span class="smc-sub" id="smc-today-rev" style="color:#64B5F6">R$0</span>
+        </div>
+        <div class="smc-divider"></div>
+        <div class="smc-item">
+          <span class="smc-dot" style="background:#FFB74D"></span>
+          <span class="smc-label">Andamento</span>
+          <span class="smc-val" id="smc-active">0</span>
+          <span class="smc-sub" id="smc-active-del" style="color:#FFB74D">0 entregas</span>
+        </div>
+        <div class="smc-divider"></div>
+        <div class="smc-item">
+          <span class="smc-dot" style="background:#2ECC71"></span>
+          <span class="smc-label">Finalizados</span>
+          <span class="smc-val" id="smc-done">0</span>
+          <span class="smc-sub" id="smc-done-rev" style="color:#2ECC71">R$0</span>
+        </div>
+        <div class="smc-divider"></div>
+        <div class="smc-item">
+          <span class="smc-dot" style="background:#E74C3C"></span>
+          <span class="smc-label">Cancelados</span>
+          <span class="smc-val" id="smc-cancelled">0</span>
+          <span class="smc-sub" id="smc-cancelled-pct" style="color:#E74C3C">0%</span>
         </div>
       </div>
       <div class="table-card">
@@ -858,6 +920,17 @@ function renderDashboard(){
   document.getElementById('statCancelledVal').textContent=cancelled.length>0?`${cancelled.length} pedido${cancelled.length>1?'s':''} perdido${cancelled.length>1?'s':''}`:' sem cancelamentos';
   document.getElementById('statCancelledPct').textContent=`${pct}% do dia`;
 
+  // Sync mobile stats bar
+  const fmtShort=v=>v>=1000?'R$'+(v/1000).toFixed(1)+'k':'R$'+v.toFixed(0);
+  document.getElementById('smc-today').textContent=today.length;
+  document.getElementById('smc-today-rev').textContent=fmtShort(todayRevenue);
+  document.getElementById('smc-active').textContent=active.length;
+  document.getElementById('smc-active-del').textContent=`${activeDelivery.length} entrega${activeDelivery.length!==1?'s':''}`;
+  document.getElementById('smc-done').textContent=done.length;
+  document.getElementById('smc-done-rev').textContent=fmtShort(doneRevenue);
+  document.getElementById('smc-cancelled').textContent=cancelled.length;
+  document.getElementById('smc-cancelled-pct').textContent=`${pct}% dia`;
+
   const recent=allOrders.slice(0,5);
   const el=document.getElementById('recentOrdersList');
   el.innerHTML=recent.length===0?`<div class="empty-admin"><div class="empty-icon">📭</div><p>Aguardando pedidos...</p></div>`:recent.map(o=>orderRowHTML(o)).join('');
@@ -1209,12 +1282,18 @@ function renderFinancial(){
   el.innerHTML=sorted.map(e=>{
     const isR=e.tipo==='receita';
     const dStr=e.data?new Date(e.data+'T12:00:00').toLocaleDateString('pt-BR'):'-';
-    return `<div class="order-row" style="cursor:default;grid-template-columns:100px 1fr 150px 44px 44px;">
-      <div style="font-size:11px;color:var(--text2);">${dStr}</div>
-      <div style="font-size:13px;">${e.descricao}</div>
-      <div style="font-weight:700;color:${isR?'var(--success)':'var(--danger)'};">${isR?'+':'-'} R$ ${e.valor.toFixed(2).replace('.',',')}</div>
-      <div><button class="btn-sm btn-ghost" onclick="editFinEntry('${e._docId}')" title="Editar">✏️</button></div>
-      <div><button class="btn-sm btn-danger" onclick="deleteFinEntry('${e._docId}')">🗑️</button></div>
+    const color=isR?'var(--success)':'var(--danger)';
+    const signal=isR?'+':'-';
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);gap:8px;">
+      <div style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;">
+        <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${e.descricao}</div>
+        <div style="font-size:11px;color:var(--text2);">${dStr}</div>
+      </div>
+      <div style="font-weight:700;color:${color};white-space:nowrap;font-size:14px;">${signal} R$ ${e.valor.toFixed(2).replace('.',',')}</div>
+      <div style="display:flex;gap:4px;flex-shrink:0;">
+        <button class="btn-sm btn-ghost" onclick="editFinEntry('${e._docId}')" title="Editar">✏️</button>
+        <button class="btn-sm btn-danger" onclick="deleteFinEntry('${e._docId}')">🗑️</button>
+      </div>
     </div>`;
   }).join('');
 }
